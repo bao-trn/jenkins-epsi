@@ -3,8 +3,9 @@ pipeline {
     tools {
             maven 'Maven 3.9.1'
         }
-        stages {
-            stage('Cleaning Workspace') {
+    stages {
+        stage('Cleaning Workspace') {
+            steps {
                 cleanWs()
             }
         }
