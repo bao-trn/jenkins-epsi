@@ -20,6 +20,12 @@ pipeline {
                 sh 'mvn package'
             }
         }
+        stage('Testing copy') {
+            steps {
+                def myPath = WORKSPACE
+                echo myPath
+            }
+        }
         /*stage('Cleaning Workspace') {
              steps {
                 //cleanWs()
