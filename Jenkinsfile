@@ -3,7 +3,11 @@ pipeline {
     tools {
             maven 'Maven 3.9.1'
         }
-    stages {
+        stages {
+            stage('Cleaning Workspace') {
+                cleanWs()
+            }
+        }
         stage('Build') {
             steps {
                 sh 'mvn clean test'
