@@ -1,3 +1,5 @@
+def workingDir = Workspace
+def jarDir = workingDir + /target/
 pipeline {
     agent any
     tools {
@@ -22,7 +24,8 @@ pipeline {
         }
         stage('Testing copy') {
             steps {
-                sh 'cp Workspace/target/*.jar /Users/Bao/Desktop/'
+
+                sh 'cp jarDir /Users/Bao/Desktop/'
                 echo Workspace
             }
         }
