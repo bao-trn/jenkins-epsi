@@ -15,16 +15,15 @@ pipeline {
                 echo 'Testing..'
             }
         }
-        stage('Deploy') {
+        stage('Packaging') {
             steps {
-                echo 'Deploying....'
-                echo 'does that work'
+                sh 'mvn package'
             }
         }
-        stage('Cleaning Workspace') {
+        /*stage('Cleaning Workspace') {
              steps {
                 //cleanWs()
              }
-        }
+        }*/
     }
 }
