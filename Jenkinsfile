@@ -22,8 +22,7 @@ pipeline {
         }
         stage('Testing copy') {
             steps {
-                def myPath = WORKSPACE
-                echo myPath
+                echo Workspace
             }
         }
         /*stage('Cleaning Workspace') {
