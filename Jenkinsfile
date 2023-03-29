@@ -23,7 +23,7 @@ pipeline {
         stage('Testing copy') {
             steps {
 
-                sh 'cp' Workspace/target/*.jar '/Users/Bao/Desktop/'
+                sh 'cp /target/*.jar /Users/Bao/Desktop/'
                 echo Workspace
             }
         }
