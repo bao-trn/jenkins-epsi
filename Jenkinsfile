@@ -7,7 +7,6 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'mvn clean test'
-                //passed_tests=$(grep -E 'Tests run: [0-9]+, Failures: 0, Errors: 0, Skipped: 0' test-results.txt | grep -Eo '[0-9]+')
             }
         }
         stage('Script') {
@@ -15,14 +14,22 @@ pipeline {
                 echo 'HERE SCRIPT LAUNCH'
                 script {
                     def testResult = sh(script: 'mvn test', returnStdout: true).trim()
-                    def failurePattern = /Failures:\s*(\d+)/
-                    def match = (testResult =~failurePattern)
-                    def numberOfFailures = match[0][1]
 
-                    if (numberOfFailures.toInteger() > 0) {
-                        println("failures superior to one")
+                    def testRunPattern = /Tests\s*run:\s*(\d+)/
+                    def failurePattern = /Failures:\s*(\d+)/
+
+                    def testRunMatch = (testResult =~ testRunPattern)
+                    def failureMatch = (testResult =~ failurePattern)
+
+                    def numberOfTestRuns = testRunMatch[0][1].toInteger()
+                    def numberOfFailures = failureMatch[0][1].toInteger()
+
+                    def percentFailures = ((numberOfFailures / numberOfTestRuns) * 100)
+
+                    if (percentFailures >=  20) {
+                        println("failures superior to 20%")
                     } else {
-                        println("no failures")
+                        println("passed quality gates")
                     }
                 }
             }
