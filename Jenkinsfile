@@ -17,14 +17,13 @@ pipeline {
                     def testResult = sh(script: 'mvn test', returnStdout: true).trim()
                     def failurePattern = /Failures:\s*(\d+)/
                     def match = (testResult =~failurePattern)
-                    if (match) {
-                        println(match[0])
-                        println(match[0][0])
-                        println(match[0][1])
+                    def numberOfFailures = match[0][1]
+
+                    if (numberOfFailures > 0) {
+                        println("failures superior to one")
                     } else {
-                        println("no match found")
+                        println("no failures")
                     }
-                    println(testResult)
                 }
             }
         }
