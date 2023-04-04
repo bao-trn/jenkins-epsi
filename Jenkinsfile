@@ -8,7 +8,6 @@ pipeline {
             steps {
                 sh 'mvn clean test'
                 //passed_tests=$(grep -E 'Tests run: [0-9]+, Failures: 0, Errors: 0, Skipped: 0' test-results.txt | grep -Eo '[0-9]+')
-                echo '$testResult'
             }
         }
         stage('Script') {
@@ -16,6 +15,7 @@ pipeline {
                 script {
                     def testResult = sh(script: 'mvn test', returnStdout: true).trim()
                 }
+                echo $testResult
             }
         }
         stage('Packaging') {
