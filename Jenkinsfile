@@ -14,8 +14,8 @@ pipeline {
             steps {
                 script {
                     def testResult = sh(script: 'mvn test', returnStdout: true).trim()
+                    println(testResult)
                 }
-                echo '${testResult}'
             }
         }
         stage('Packaging') {
