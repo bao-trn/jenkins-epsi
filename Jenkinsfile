@@ -15,6 +15,13 @@ pipeline {
                 echo 'HERE SCRIPT LAUNCH'
                 script {
                     def testResult = sh(script: 'mvn test', returnStdout: true).trim()
+                    def failurePattern = /Failures: [0-1000]/
+                    def match = (testResult =~failurePattern)
+                    if (match) {
+                        println(match[0])
+                    } else {
+                        println("no match found")
+                    }
                     println(testResult)
                 }
             }
