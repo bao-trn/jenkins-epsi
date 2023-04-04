@@ -7,9 +7,9 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'mvn clean test'
-                sh 'mvn test' > test-results.txt
+                def testResult = sh(script: 'mvn test', returnStdout: true).trim()
                 //passed_tests=$(grep -E 'Tests run: [0-9]+, Failures: 0, Errors: 0, Skipped: 0' test-results.txt | grep -Eo '[0-9]+')
-                echo 'Building..'
+                echo '$testResult'
             }
         }
         stage('Test') {
