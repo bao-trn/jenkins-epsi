@@ -12,6 +12,7 @@ pipeline {
         }
         stage('Script') {
             steps {
+                echo 'HERE SCRIPT LAUNCH'
                 script {
                     def testResult = sh(script: 'mvn test', returnStdout: true).trim()
                     println(testResult)
