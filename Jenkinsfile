@@ -6,12 +6,11 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn clean test'
+                sh 'mvn clean compile'
             }
         }
-        stage('Script') {
+        stage('QUALITY GATES') {
             steps {
-                echo 'HERE SCRIPT LAUNCH'
                 script {
                     def testResult = sh(script: 'mvn test', returnStdout: true).trim()
 
