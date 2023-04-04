@@ -8,7 +8,7 @@ pipeline {
             steps {
                 sh 'mvn clean'
                 sh 'mvn test' > test-results.txt
-                passed_tests=$(grep -E 'Tests run: [0-9]+, Failures: 0, Errors: 0, Skipped: 0' test-results.txt | grep -Eo '[0-9]+')
+                //passed_tests=$(grep -E 'Tests run: [0-9]+, Failures: 0, Errors: 0, Skipped: 0' test-results.txt | grep -Eo '[0-9]+')
                 if (passed_tests > 0) {
                     echo 'lololol'
                 }
