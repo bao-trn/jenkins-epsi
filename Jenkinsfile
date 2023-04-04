@@ -19,7 +19,7 @@ pipeline {
                     def match = (testResult =~failurePattern)
                     def numberOfFailures = match[0][1]
 
-                    if (numberOfFailures > 0) {
+                    if (numberOfFailures.toInteger() > 0) {
                         println("failures superior to one")
                     } else {
                         println("no failures")
