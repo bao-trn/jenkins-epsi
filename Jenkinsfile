@@ -18,6 +18,8 @@ pipeline {
                     def failurePattern = /Failures:\s*(\d+)/
                     def match = (testResult =~failurePattern)
                     if (match) {
+                        println(match[0])
+                        println(match[0][0])
                         println(match[0][1])
                     } else {
                         println("no match found")
