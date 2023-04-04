@@ -15,7 +15,8 @@ pipeline {
                 script {
                     def testResult = sh(script: 'mvn test', returnStdout: true).trim()
                 }
-                echo $testResult
+                echo '${testResult}'
+                echo ${testResult}
             }
         }
         stage('Packaging') {
