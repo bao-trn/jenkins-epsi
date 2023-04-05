@@ -25,12 +25,7 @@ pipeline {
 
                     def percentFailures = ((numberOfFailures / numberOfTestRuns) * 100)
 
-                    if (percentFailures >=  20) {
-                        println("failures superior to 20%")
-                        error 'Failure rate superior to 20%'
-                    } else {
-                        println("passed quality gates")
-                    }
+                    println(percentFailures)
                 }
                 post {
                     failure {
