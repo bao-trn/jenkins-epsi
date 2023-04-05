@@ -27,7 +27,6 @@ pipeline {
 
                     PERCENT_FAILURE = ((numberOfFailures / numberOfTestRuns) * 100)
 
-                    println(percentFailures)
                 }
             }
         }
@@ -37,11 +36,7 @@ pipeline {
                 sh 'mvn package'
             }
         }
-        stage('Testing copy') {
-            steps {
-                echo Workspace
-            }
-        }
+
         /*stage('Cleaning Workspace') {
              steps {
                 //cleanWs()
@@ -55,7 +50,7 @@ pipeline {
             echo 'Build failed'
                 mail to: 'baoanh.tran@epsi.fr',
                 subject: 'Build failed',
-                body: '${PERCENT_FAILURE}'
+                body: PERCENT_FAILURE.toString()
         }
     }
 }
