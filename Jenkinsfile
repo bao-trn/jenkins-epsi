@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    def percentFailures = 0;
     tools {
             maven 'Maven 3.9.1'
         }
@@ -23,7 +24,7 @@ pipeline {
                     def numberOfTestRuns = testRunMatch[0][1].toInteger()
                     def numberOfFailures = failureMatch[0][1].toInteger()
 
-                    def percentFailures = ((numberOfFailures / numberOfTestRuns) * 100)
+                    percentFailures = ((numberOfFailures / numberOfTestRuns) * 100)
 
                     println(percentFailures)
                 }
