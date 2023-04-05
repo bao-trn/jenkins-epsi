@@ -51,11 +51,11 @@ pipeline {
     }
     post {
         failure {
-            echo PERCENT_FAILURE
+            echo PERCENT_FAILURE.toString()
             echo 'Build failed'
                 mail to: 'baoanh.tran@epsi.fr',
                 subject: 'Build failed',
-                body: PERCENT_FAILURE
+                body: '${PERCENT_FAILURE}'
         }
     }
 }
