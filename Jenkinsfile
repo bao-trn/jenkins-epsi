@@ -1,6 +1,7 @@
+def PERCENT_FAILURE = 0;
+
 pipeline {
     agent any
-    def percentFailures = 0;
     tools {
             maven 'Maven 3.9.1'
         }
@@ -24,7 +25,7 @@ pipeline {
                     def numberOfTestRuns = testRunMatch[0][1].toInteger()
                     def numberOfFailures = failureMatch[0][1].toInteger()
 
-                    percentFailures = ((numberOfFailures / numberOfTestRuns) * 100)
+                    PERCENT_FAILURE = ((numberOfFailures / numberOfTestRuns) * 100)
 
                     println(percentFailures)
                 }
@@ -50,11 +51,11 @@ pipeline {
     }
     post {
         failure {
-            echo percentFailures
+            echo PERCENT_FAILURE
             echo 'Build failed'
                 mail to: 'baoanh.tran@epsi.fr',
                 subject: 'Build failed',
-                body: percentFailures
+                body: PERCENT_FAILURE
         }
     }
 }
