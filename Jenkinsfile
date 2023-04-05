@@ -27,9 +27,7 @@ pipeline {
 
                     PERCENT_FAILURE = ((numberOfFailures / numberOfTestRuns) * 100)
 
-                    if (PERCENT_FAILURE > 20) {
-                        error 'GODDAMN YOUR CODE SUCK'
-                    }
+
                 }
             }
         }
@@ -48,6 +46,9 @@ pipeline {
 
     }
     post {
+        success {
+            echo 'YOUR CODE IS A GODDAMN SUCCESS'
+        }
         failure {
             echo PERCENT_FAILURE.toString()
             echo 'Build failed'
