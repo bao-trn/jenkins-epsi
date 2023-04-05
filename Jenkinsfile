@@ -27,6 +27,7 @@ pipeline {
 
                     if (percentFailures >=  20) {
                         println("failures superior to 20%")
+                        error 'Failure rate superior to 20%'
                     } else {
                         println("passed quality gates")
                     }
