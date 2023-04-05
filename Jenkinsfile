@@ -14,7 +14,7 @@ pipeline {
         stage('QUALITY GATES') {
             steps {
                 script {
-                    def testResult = sh(script: 'mvn test', returnStdout: true).trim()
+                    def testResult = sh(script: 'mvn test' || true, returnStdout: true).trim()
 
                     def testRunPattern = /Tests\s*run:\s*(\d+)/
                     def failurePattern = /Failures:\s*(\d+)/
