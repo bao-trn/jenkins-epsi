@@ -27,13 +27,16 @@ pipeline {
 
                     PERCENT_FAILURE = ((numberOfFailures / numberOfTestRuns) * 100)
 
+                    if (PERCENT_FAILURE > 20) {
+                        error 'GODDAMN YOUR CODE SUCK'
+                    }
                 }
             }
         }
 
         stage('Packaging') {
             steps {
-                sh 'mvn package'
+                sh 'mvn -B -Dmaven.test.skip=true package'
             }
         }
 
