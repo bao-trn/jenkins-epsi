@@ -27,14 +27,14 @@ pipeline {
 
                     println(percentFailures)
                 }
-                post {
-                    failure {
-                        echo 'Build failed'
-                            mail to: 'baoanh.tran@epsi.fr',
-                            subject: 'Build failed',
-                            body: "The percentage of tests failures is superior to 20%"
-                    }
-                }
+            }
+        }
+        post {
+            failure {
+                echo 'Build failed'
+                    mail to: 'baoanh.tran@epsi.fr',
+                    subject: 'Build failed',
+                    body: "The percentage of tests failures is superior to 20%"
             }
         }
         stage('Packaging') {
