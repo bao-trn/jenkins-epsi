@@ -6,7 +6,7 @@ pipeline {
             maven 'Maven 3.9.1'
         }
     stages {
-        stage('Build') {
+        stage('BUILD') {
             steps {
                 sh 'mvn clean compile'
             }
@@ -27,31 +27,30 @@ pipeline {
 
                     PERCENT_FAILURE = ((numberOfFailures / numberOfTestRuns) * 100)
 
-
+                    //the job will always be successful due to the 'true' in the script above
+                    //we're using the percentage of failed test to make the job pass or not
+                    //NOTE : by default a failed test will fail the job, hence the use of 'true'
+                    if (PERCENT_FAILURE > 20) {
+                        error 'YOU SUCK AT UNIT TESTING'
+                    }
                 }
             }
         }
-
-        stage('Packaging') {
+        stage('PACKAGING') {
             steps {
                 sh 'mvn -B -Dmaven.test.skip=true package'
             }
         }
 
-        /*stage('Cleaning Workspace') {
-             steps {
-                //cleanWs()
-             }
-        }*/
-
     }
+
     post {
         success {
-            echo 'YOUR CODE IS A GODDAMN SUCCESS'
+            echo 'YOUR SO GOOD AT UNIT TESTING'
         }
         failure {
-            echo PERCENT_FAILURE.toString()
-            echo 'Build failed'
+            echo 'THE PERCENTAGE OF FAILED TESTS IS: ' + PERCENT_FAILURE.toString()
+            echo 'BUILD FAILED, SENDING AN EMAIL...'
                 mail to: 'baoanh.tran@epsi.fr',
                 subject: 'Build failed',
                 body: PERCENT_FAILURE.toString()
